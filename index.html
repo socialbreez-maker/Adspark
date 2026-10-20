@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdSpark — ads that sell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Write better ads * Ship faster * Test more variants * Write better ads * Ship faster * Test more variants * </span>
+      <span>Write better ads * Ship faster * Test more variants * Write better ads * Ship faster * Test more variants * </span>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">Ad<span class="spark">Spark</span></span>
+      <span class="brand-tag">the copy engine for advertisers</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-item active" data-view="create">Create</button>
+      <button class="nav-item" data-view="rivals">Rivals</button>
+      <button class="nav-item" data-view="library">Library</button>
+      <button class="nav-item" data-view="insights">Insights</button>
+    </nav>
+    <div class="topbar-right">
+      <button class="mode-chip" id="modeChip" data-action="open-settings" title="Engine status — click to configure">
+        <span class="dot"></span><span id="modeChipText">Templates</span>
+      </button>
+      <button class="gear" id="gearBtn" data-action="open-settings" title="Settings">&#9881;</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- CREATE -->
+    <section class="view" id="view-create">
+      <div class="hero">
+        <h1>Ads that <em>sell</em>,<br />not just exist.</h1>
+        <p>Tell the engine about your product. Get platform-native copy in seconds — AI-powered or fully offline.</p>
+      </div>
+
+      <form class="brief" id="briefForm">
+        <div class="field">
+          <label for="bfProduct">Product / service</label>
+          <input id="bfProduct" type="text" required placeholder="e.g. Flowdesk — a standing desk that moves with you" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="bfAudience">Who is it for?</label>
+            <input id="bfAudience" type="text" placeholder="remote workers with back pain" />
+          </div>
+          <div class="field">
+            <label for="bfBenefit">Biggest benefit</label>
+            <input id="bfBenefit" type="text" placeholder="erases back pain in 2 weeks" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tone</label>
+            <div class="tone-picker" id="tonePicker">
+              <button type="button" class="tone active" data-tone="bold">Bold</button>
+              <button type="button" class="tone" data-tone="friendly">Friendly</button>
+              <button type="button" class="tone" data-tone="premium">Premium</button>
+              <button type="button" class="tone" data-tone="urgent">Urgent</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Platforms</label>
+            <div class="platform-picker" id="platformPicker">
+              <button type="button" class="plat active" data-plat="instagram">Instagram</button>
+              <button type="button" class="plat active" data-plat="google">Google</button>
+              <button type="button" class="plat active" data-plat="twitter">X / Twitter</button>
+              <button type="button" class="plat active" data-plat="linkedin">LinkedIn</button>
+            </div>
+          </div>
+        </div>
+        <div class="brief-foot">
+          <button class="btn-spark" id="sparkBtn" type="submit">
+            Generate copy <span class="arrow">&rarr;</span>
+          </button>
+          <label class="ab-toggle" title="Generate two variants and save them as a test pair">
+            <input type="checkbox" id="abMode" />
+            <span>A/B pair mode</span>
+          </label>
+        </div>
+      </form>
+
+      <div class="result-actions-row" id="resultActionsRow" style="display:none">
+        <button class="chip" data-action="copy-all">Copy all platforms</button>
+        <button class="chip" data-action="export-txt">Export .txt</button>
+        <button class="chip" data-action="export-csv">Export .csv</button>
+        <button class="chip" data-action="print-brief">Print / PDF brief</button>
+      </div>
+      <div id="results"></div>
+    </section>
+
+    <!-- RIVALS -->
+    <section class="view hidden" id="view-rivals">
+      <div class="hero small">
+        <h1>Know your <em>rivals</em>.</h1>
+        <p>Position yourself, find angles they can't copy, get strategy advice.</p>
+      </div>
+
+      <form class="brief" id="rivalsForm">
+        <div class="field">
+          <label for="rpProduct">Your product</label>
+          <input id="rpProduct" type="text" required placeholder="Sortly — the calm task planner" />
+        </div>
+        <div class="field">
+          <label for="rpUSP">Your unfair advantage (the thing rivals can't say)</label>
+          <input id="rpUSP" type="text" placeholder="replans itself when life happens" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Competitor 1</label>
+            <input id="rpC1" type="text" placeholder="Notion" />
+            <input id="rpC1Known" type="text" placeholder="all-in-one workspace, powerful but complex" />
+          </div>
+          <div class="field">
+            <label>Competitor 2 (optional)</label>
+            <input id="rpC2" type="text" placeholder="Todoist" />
+            <input id="rpC2Known" type="text" placeholder="classic to-do lists, fast but rigid" />
+          </div>
+        </div>
+        <div class="brief-foot">
+          <button class="btn-spark" id="rivalsBtn" type="submit">
+            Analyze rivals <span class="arrow">&rarr;</span>
+          </button>
+        </div>
+      </form>
+
+      <div id="rivalsResults"></div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section class="view hidden" id="view-library">
+      <div class="hero small">
+        <h1>The <em>library</em>.</h1>
+        <p>Every idea you've saved. Star the winners, crown the A/B champs.</p>
+      </div>
+      <div class="library-filters" id="libraryFilters">
+        <button class="chip active" data-plat="all">All</button>
+        <button class="chip" data-plat="instagram">Instagram</button>
+        <button class="chip" data-plat="google">Google</button>
+        <button class="chip" data-plat="twitter">X / Twitter</button>
+        <button class="chip" data-plat="linkedin">LinkedIn</button>
+      </div>
+      <div class="library-grid" id="libraryGrid"></div>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section class="view hidden" id="view-insights">
+      <div class="hero small">
+        <h1>Gut check by the <em>numbers</em>.</h1>
+        <p>What you've been generating and what you liked.</p>
+      </div>
+      <div class="insight-grid" id="insightGrid"></div>
+      <div class="insight-panels">
+        <div class="panel">
+          <h2>Platform mix</h2>
+          <div class="hbars" id="hbarsPlatform"></div>
+        </div>
+        <div class="panel">
+          <h2>Tone mix — wins teach the engine</h2>
+          <div class="hbars" id="hbarsTone"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>AdSpark — built for advertisers who hate blank pages.</span>
+  </footer>
+
+  <!-- SETTINGS MODAL -->
+  <div class="modal-backdrop hidden" id="settingsBackdrop">
+    <div class="modal" id="settingsModal">
+      <h3>Engine settings</h3>
+      <p class="modal-sub">AdSpark runs fully offline with its built-in template engine. Add your own API key to switch the engine to real AI. Your key never leaves this browser — it's stored locally and sent straight to the provider.</p>
+      <form id="settingsForm">
+        <div class="form-group">
+          <label>Engine</label>
+          <div class="seg" id="providerSeg">
+            <button type="button" data-prov="off" id="segOff">Templates (offline)</button>
+            <button type="button" data-prov="openai">OpenAI</button>
+            <button type="button" data-prov="gemini">Gemini</button>
+          </div>
+        </div>
+        <div id="aiFields">
+          <div class="form-group">
+            <label for="setKey">API key</label>
+            <input id="setKey" type="password" autocomplete="off" placeholder="sk-... or AIza..." />
+          </div>
+          <div class="form-group">
+            <label for="setModel">Model</label>
+            <input id="setModel" type="text" placeholder="gpt-4o-mini / gemini-2.0-flash" />
+          </div>
+          <div class="hint" id="provHint">Get a key at platform.openai.com — the cheapest mini models are perfect for ad copy.</div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" data-action="close-settings">Cancel</button>
+          <button type="submit" class="btn primary">Save settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="printArea"></div>
+
+  <button class="side-help" id="sideHelp" title="What do these things do?">?</button>
+  <aside class="help-panel hidden" id="helpPanel" aria-label="Feature guide">
+    <div class="help-head">
+      <strong>What's what?</strong>
+      <button class="lib-del" id="helpClose">&times;</button>
+    </div>
+    <div class="help-body">
+      <details>
+        <summary>Create tab — the brief form</summary>
+        <p>Type your <b>product</b>, <b>audience</b> and <b>biggest benefit</b>. Pick a tone and platforms. One click gives you ready, platform-native ad copy for each one.</p>
+      </details>
+      <details>
+        <summary>Templates vs AI mode</summary>
+        <p><b>Templates</b> (gold dot) is a built-in writing engine — works fully offline, no key needed.<br /><b>AI mode</b> (orange pulsing dot) sends your brief to an LLM through your own API key (gear icon) for fresher, less repetitive copy. If AI fails or errors, AdSpark silently falls back to templates.</p>
+      </details>
+      <details>
+        <summary>A/B pair mode</summary>
+        <p>Toggle it on before generating. Each card gets a <b>"Save as A/B pair"</b> button: it saves your edited version as <b>arm A</b> and a re-rolled spin as <b>arm B</b>. Run both arms live in a real campaign, then in the Library hit <b>👑 Crown winner</b> on the one that performed. The engine records the winning tone and starts preferrring it in future generations.</p>
+      </details>
+      <details>
+        <summary>Performance budget score</summary>
+        <p>Every generated card gets a 0–100 copywriting health score. It checks: filler words ("very", "really", "amazing"), heavy adverbs, sentences longer than ~24 words, ALL-CAPS shouting and exclamation overload. <b>Sharp</b> = ship it. <b>Okay</b> = tighten. <b>Needs work</b> = rewrite before spending money on it.</p>
+      </details>
+      <details>
+        <summary>Rivals tab</summary>
+        <p>Competitive strategy tool. Add your product + your unfair advantage, then up to 2 competitors and what they're known for. You get a head-to-head positioning table, <b>attack angles</b> rivals structurally can't copy, a do/don't list and platform advice. Add an AI key for sharper, market-aware analysis.</p>
+      </details>
+      <details>
+        <summary>Library</summary>
+        <p>Everything you saved lives here. ★ marks personal winners, 👑 crowns A/B champions. Losers fade out. This is your "what actually works" archive.</p>
+      </details>
+      <details>
+        <summary>Exports &amp; print</summary>
+        <p>Above results: <b>Copy all</b> (every platform at once), <b>.csv</b> (row per headline, for media buyers/spreadsheets), <b>.txt</b> (human-readable), <b>Print/PDF</b> (clean client-ready one-pager with letterhead and scores).</p>
+      </details>
+      <details>
+        <summary>Insights</summary>
+        <p>Win rate (★ ÷ total), A/B tests run, words written, and which platforms/tones you lean on. Gut check by numbers before you open your wallet.</p>
+      </details>
+    </div>
+  </aside>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script src="js/store.js"></script>
+  <script src="js/budget.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/advisor.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
